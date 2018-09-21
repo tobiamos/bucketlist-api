@@ -98,16 +98,16 @@ module.exports.getAllItems = async (req, res) => {
 };
 
 module.exports.getOneItem = async (req, res) => {
-  const item = await BucketList
+  const items = await BucketList
     .findById(req.params.bucketId)
     .select('items')
-    .where('items._id')
-    .equals(req.params.itemId);
+    .exec();
+  const thisItem = items.items.id(req.params.itemId);
 
-  if (!item) {
+  if (!thisItem) {
     return sendJSONResponse(res, 404, null, req.method, 'Item not found');
   }
-  return sendJSONResponse(res, 200, { item }, req.method, 'Item fetched sucessfully');
+  return sendJSONResponse(res, 200, { thisItem }, req.method, 'Item fetched sucessfully');
 };
 
 module.exports.updateOneItem = async (req, res) => {
@@ -120,7 +120,7 @@ module.exports.updateOneItem = async (req, res) => {
   name ? thisItem.name = name : thisItem.name = thisItem.name;
   done ? thisItem.done = done : thisItem.done = thisItem.done;
   await items.save();
-  return sendJSONResponse(res, 200, { items }, req.method, 'Item updated sucessfully');
+  return sendJSONResponse(res, 200, { thisItem }, req.method, 'Item updated sucessfully');
 };
 
 module.exports.deleteOneItem = async (req, res) => {

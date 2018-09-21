@@ -9,7 +9,7 @@ module.exports.register = async (req, res) => {
   } = req.body;
   const existingUser = await User.findOne({ email });
   if (existingUser) {
-    return sendJSONResponse(res, 400, null, req.method, 'An account with this email already exists');
+    return sendJSONResponse(res, 403, null, req.method, 'An account with this email already exists');
   }
   if (password !== confirm) {
     return sendJSONResponse(res, 400, null, req.method, 'Passwords do not match');

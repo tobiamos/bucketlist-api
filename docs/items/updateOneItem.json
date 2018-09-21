@@ -1,0 +1,125 @@
+{
+  "put": {
+    "tags": ["BucketList"],
+    "description": "Update Bucket List",
+    "parameters": [{
+      "name": "Update Bucket List",
+      "in": "body",
+      "description": "request payload",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "propose"
+          },
+          "done": {
+            "type": "boolean",
+            "example": true
+          }
+         }
+      }
+    },{
+      "name": "authorization",
+      "in": "header",
+      "description": "authorization  headers",
+      "schema": {
+        "type": "string",
+        "example":  "averlongjsonwebtokenstring"
+      },
+      "required": true
+    },
+    {
+      "name": "bucketId",
+      "in": "path",
+      "schema": {
+        "type": "string",
+        "example": "5ba4c732ec97cb3278b211b2"
+      },
+      "required": true,
+      "description": "Unique id of the bucketlist"
+    },
+    {
+      "name": "itemId",
+      "in": "path",
+      "schema": {
+        "type": "string",
+        "example": "5ba4c732ec97cb3278b211b2"
+      },
+      "required": true,
+      "description": "Unique id of the bucketlist item"
+    }
+  ],
+    "produces": ["application/json"],
+    "responses": {
+      "200": {
+        "description": "BucketList item Update Successful",
+        "schema": {
+          "type": "object",
+          "example": {
+            "status": 200,
+            "method": "PUT",
+            "message": "Item updated sucessfully",
+            "data": {
+                "thisItem": {
+                    "done": false,
+                    "_id": "5ba4ab43adc5b826b088062f",
+                    "name": "buy saclux paint",
+                    "createdAt": "2018-09-21T08:26:43.162Z",
+                    "updatedAt": "2018-09-21T15:47:10.581Z"
+                }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "BucketList item not found",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 404
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "BucketList item not found"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Authentication Failed",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 400
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Authentication Failed"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      }
+    }
+  }
+}

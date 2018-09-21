@@ -1,0 +1,88 @@
+{
+  "post": {
+    "tags": ["Auth"],
+    "description": "Login Existing User",
+    "parameters": [{
+      "name": "Login Existing User",
+      "in": "body",
+      "description": "request payload",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "tobi@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "pa55w0rd"
+          } 
+         }
+      }
+    }],
+    "produces": ["application/json"],
+    "responses": {
+      "200": {
+        "description": "Login successful!",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 200
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Login Sucessful"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Amos Tobi"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "tobi@gmail.com"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjA0ZWRiMDZiZDc2MTQwMzgyOWNkMzkiLCJuYW1lIjoiQW1vcyBUb2JpIiwiZW1haWwiOiJ0b2JpQGdva2FkYS5uZyIsImlhdCI6MTUyNzA0OTY0OSwiZXhwIjoxNTI3MTM2MDQ5fQ.-mrtcyVbcCmfyP7HovesvPLT4CFD3kCLzmY24BbKPcU"
+                    }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Invalid Login Credentials",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 400
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Invalid Login Credentials"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      }
+    }
+  }
+}

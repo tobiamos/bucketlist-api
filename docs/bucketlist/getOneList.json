@@ -1,0 +1,154 @@
+{
+  "get": {
+    "tags": ["BucketList"],
+    "description": "Create a new Bucket List",
+    "parameters": [{
+      "name": "authorization",
+      "in": "header",
+      "description": "authorization  headers",
+      "schema": {
+        "type": "string",
+        "example":  "averylongjsonwebtokenstring"
+      }
+    }, {
+      "name": "bucketId",
+      "in": "path",
+      "schema": {
+        "type": "string",
+        "example": "5ba4c732ec97cb3278b211b2"
+      },
+      "required": true,
+      "description": "Unique id of the bucketlist"
+    }],
+    "produces": ["application/json"],
+    "responses": {
+      "200": {
+        "description": "BucketList fetched Sucessfully",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 200
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Bucket fetched successfully"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "bucket": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Valentine"
+                    },
+                    "_id": {
+                      "type": "string",
+                      "example": "5ba4c732ec97cb3278b211b2"
+                    },
+                    "createdBy": {
+                      "type": "string",
+                      "example": "5ba4c732ec97cb3278b211b2"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2018-09-21T10:25:54.944Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2018-09-21T10:25:54.944Z"
+                    },
+                    "items": {
+                      "type": "array",
+                      "example": []
+                    }
+                  }
+                }
+                    
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "BucketList not found",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 400
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "BucketList not found"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Id is not valid",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 400
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Id is not valid"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Authentication Failed",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 401
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Authentication Failed"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      }
+    }
+  }
+}

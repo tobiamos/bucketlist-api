@@ -1,0 +1,120 @@
+{
+  "post": {
+    "tags": ["Auth"],
+    "description": "Create a new user account",
+    "parameters": [{
+      "name": "Create Account",
+      "in": "body",
+      "description": "request payload",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "tobi@gmail.com"
+          },
+          "name": {
+            "type": "string",
+            "example": "Amos Tobi"
+          },
+          "password": {
+            "type": "string",
+            "example": "pa55w0rd"
+          }, 
+          "confirm": {
+            "type": "string",
+            "example": "pa55w0rd"
+          } 
+         }
+      }
+    }],
+    "produces": ["application/json"],
+    "responses": {
+      "200": {
+        "description": "Account Creation Successful",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 200
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Account created successfully"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Amos Tobi"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "tobi@gmail.com"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjA0ZWRiMDZiZDc2MTQwMzgyOWNkMzkiLCJuYW1lIjoiQW1vcyBUb2JpIiwiZW1haWwiOiJ0b2JpQGdva2FkYS5uZyIsImlhdCI6MTUyNzA0OTY0OSwiZXhwIjoxNTI3MTM2MDQ5fQ.-mrtcyVbcCmfyP7HovesvPLT4CFD3kCLzmY24BbKPcU"
+                    }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Passwords do not match",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 400
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Passwords do not match"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Email Already Exists",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 400
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "An Account with this email already exists"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      }
+    }
+  }
+}

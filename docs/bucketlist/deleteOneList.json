@@ -1,0 +1,102 @@
+{
+  "delete": {
+    "tags": ["BucketList"],
+    "description": "Delete Bucket List",
+    "parameters": [{
+      "name": "authorization",
+      "in": "header",
+      "description": "authorization  headers",
+      "schema": {
+        "type": "string",
+        "example":  "averlongjsonwebtokenstring"
+      },
+      "required": true
+    },
+    {
+      "name": "bucketId",
+      "in": "path",
+      "schema": {
+        "type": "string",
+        "example": "5ba4c732ec97cb3278b211b2"
+      },
+      "required": true,
+      "description": "Unique id of the bucketlist"
+    }
+  ],
+    "produces": ["application/json"],
+    "responses": {
+      "200": {
+        "description": "BucketList Delete Successful",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 200
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Bucket deleted successfully"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "BucketList not found",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 400
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "BucketList not found"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Authentication Failed",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 400
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Authentication Failed"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      }
+    }
+  }
+}

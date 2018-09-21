@@ -1,0 +1,135 @@
+{
+  "post": {
+    "tags": ["BucketList"],
+    "description": "Create a new Bucket List",
+    "parameters": [{
+      "name": "Create new Bucket List",
+      "in": "body",
+      "description": "request payload",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Amos Tobi"
+          }
+         }
+      }
+    },{
+      "name": "authorization",
+      "in": "header",
+      "description": "authorization  headers",
+      "schema": {
+        "type": "string",
+        "example":  "averlongjsonwebtokenstring"
+      },
+      "required": true
+    }],
+    "produces": ["application/json"],
+    "responses": {
+      "200": {
+        "description": "BucketList Creation Sucessful",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 200
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Bucket created successfully"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "bucket": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Valentine"
+                    },
+                    "_id": {
+                      "type": "string",
+                      "example": "5ba4c732ec97cb3278b211b2"
+                    },
+                    "createdBy": {
+                      "type": "string",
+                      "example": "5ba4c732ec97cb3278b211b2"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2018-09-21T10:25:54.944Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2018-09-21T10:25:54.944Z"
+                    },
+                    "items": {
+                      "type": "array",
+                      "example": []
+                    }
+                  }
+                }
+                    
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Name is required",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 400
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Name is required"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Authentication Failed",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 400
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Authentication Failed"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,25 +1,16 @@
 {
-	"swagger": "3.0",
-	"info": {
-		"version": "1.0.0",
-		"title": "BucketLIst API",
-		"description": "Nodejs BucketList Api"
-	},
-	"servers": {
-    "url": "localhost:4000",
-    "description": "local development server"
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "BucketList Api",
+    "description": ""
   },
-	"basePath": "/api/v1",
-	"schemes": ["http", "https"],
-	"consumes": ["application/json"],
-	"produces": ["application/json"],
-	"paths": {
-		"/auth": {}
-	},
-	"definitions": {
-  },
-  "components": {
-    "schemas": {
-    }
+  "servers": ["localhost:4000"],
+  "basePath": "/api/v1",
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+
   }
 }

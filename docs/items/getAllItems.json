@@ -1,0 +1,81 @@
+{
+  "get": {
+    "tags": ["BucketList"],
+    "description": "Fetched all items in bucket list",
+    "parameters": [{
+      "name": "authorization",
+      "in": "header",
+      "description": "authorization  headers",
+      "schema": {
+        "type": "string",
+        "example":  "averlongjsonwebtokenstring"
+      },
+      "required": true
+    },{
+      "name": "bucketId",
+      "in": "path",
+      "schema": {
+        "type": "string",
+        "example": "5ba4c732ec97cb3278b211b2"
+      },
+      "required": true,
+      "description": "Unique id of the bucketlist"
+    }],
+    "produces": ["application/json"],
+    "responses": {
+      "200": {
+        "description": "Fetched all items in bucket list",
+        "schema": {
+          "type": "object",
+          "example": {
+            "status": 200,
+            "method": "GET",
+            "message": "Fetched all items in bucket list",
+            "data": {
+                "items": [
+                    {
+                        "done": true,
+                        "_id": "5ba4ab43adc5b826b088062f",
+                        "name": "buy saclux paint",
+                        "createdAt": "2018-09-21T08:26:43.162Z",
+                        "updatedAt": "2018-09-21T08:33:18.209Z"
+                    },
+                    {
+                        "done": false,
+                        "_id": "5ba4de98b8d6da051cb81471",
+                        "name": "buy ring",
+                        "createdAt": "2018-09-21T12:05:44.739Z",
+                        "updatedAt": "2018-09-21T12:05:44.739Z"
+                    }
+                ]
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Authentication Failed",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 400
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Authentication Failed"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      }
+    }
+  }
+}

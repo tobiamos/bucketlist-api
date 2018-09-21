@@ -1,0 +1,93 @@
+{
+  "get": {
+    "tags": ["BucketList"],
+    "description": "Get one  Bucket List Item",
+    "parameters": [{
+      "name": "authorization",
+      "in": "header",
+      "description": "authorization  headers",
+      "schema": {
+        "type": "string",
+        "example":  "averlongjsonwebtokenstring"
+      },
+      "required": true
+    },{
+      "name": "bucketId",
+      "in": "path",
+      "schema": {
+        "type": "string",
+        "example": "5ba4c732ec97cb3278b211b2"
+      },
+      "required": true,
+      "description": "Unique id of the bucketlist"
+    },{
+      "name": "itemId",
+      "in": "path",
+      "schema": {
+        "type": "string",
+        "example": "5ba4c732ec97cb3278b211b2"
+      },
+      "required": true,
+      "description": "Unique id of the bucketlist item"
+    }],
+    "produces": ["application/json"],
+    "responses": {
+      "200": {
+        "description": "Item fetched sucessfully",
+        "schema": {
+          "type": "object",
+          "example": {
+            "status": 200,
+            "method": "GET",
+            "message": "Item fetched sucessfully",
+          "data": {
+        "thisItem": {
+            "done": true,
+            "_id": "5ba4ab43adc5b826b088062f",
+            "name": "buy saclux paint",
+            "createdAt": "2018-09-21T08:26:43.162Z",
+            "updatedAt": "2018-09-21T08:33:18.209Z"
+        }
+    }
+          }
+        }
+      },
+      "404": {
+        "description": "Item not found",
+        "schema": {
+          "type": "object",
+          "example": {
+            "status": 404,
+            "method": "GET",
+            "message": "Item not found",
+            "data": null
+          }
+        }
+      },
+      "401": {
+        "description": "Authentication Failed",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "number",
+              "example": 400
+            },
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "message": {
+              "type": "string",
+              "example": "Authentication Failed"
+            },
+            "data": {
+              "type": "string",
+              "example": "null"
+            }
+          }
+        }
+      }
+    }
+  }
+}
