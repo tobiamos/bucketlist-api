@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
+const swaggerUi = require('swagger-ui-express');
 require('./src/models');
 
 const { sendJSONResponse } = require('./src/helpers');
@@ -10,6 +11,7 @@ const chalk = require('./src/handlers/chalk');
 const logger = require('./src/handlers/logger');
 const config = require('./src/config');
 const apiRoutes = require('./src/routes');
+const docs = require('./docs/swagger');
 
 const app = express();
 
@@ -22,6 +24,9 @@ app.use(helmet());
 app.use(cors(corsOptions));
 if (config.env !== 'test') {
   app.use(morgan('dev', { stream: logger.stream }));
+}
+if (config.env === 'development') {
+  app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(docs));
 }
 
 app.use(express.urlencoded({ extended: true }));

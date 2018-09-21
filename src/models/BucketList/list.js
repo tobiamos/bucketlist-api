@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
-  name: String,
-  done: Boolean,
+  name: { type: String, required: true },
+  done: { type: Boolean, default: false },
 }, { timestamps: true });
 
 const BucketListSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true, trim: true },
   items: [itemSchema],
   createdBy: {
     type: mongoose.Schema.ObjectId,

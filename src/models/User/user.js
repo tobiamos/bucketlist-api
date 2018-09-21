@@ -4,8 +4,12 @@ const { sign } = require('jsonwebtoken');
 const { secret } = require('../../config');
 
 const UserSchema = new mongoose.Schema({
-  name: { type: String, lowercase: true, trim: true },
-  email: { type: String, lowercase: true, trim: true },
+  name: {
+    type: String, required: 'Please provide a name', lowercase: true, trim: true,
+  },
+  email: {
+    type: String, required: 'Please provide an email', lowercase: true, trim: true,
+  },
   hash: String,
   salt: String,
 }, { timestamps: true });
