@@ -8,8 +8,9 @@ module.exports.createBucket = {
 
 module.exports.getBuckets = {
   query: {
-    offset: joi.number().optional(),
-    limit: joi.number().optional(),
+    page: joi.number().optional(),
+    limit: joi.number().max(100).optional(),
+    q: joi.string().optional(),
   },
 };
 

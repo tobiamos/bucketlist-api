@@ -15,4 +15,8 @@ const BucketListSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
+BucketListSchema.index({
+  name: 'text',
+  description: 'text',
+});
 module.exports = mongoose.model('BucketList', BucketListSchema);

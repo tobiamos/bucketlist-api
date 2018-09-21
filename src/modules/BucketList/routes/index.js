@@ -17,6 +17,7 @@ router.get(
   '/',
   catchErrors(authenticate),
   validate(policies.getBuckets),
+  catchErrors(bucketListController.searchBucketList),
   catchErrors(bucketListController.getBuckets),
 );
 

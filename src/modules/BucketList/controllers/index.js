@@ -12,9 +12,52 @@ module.exports.createBucket = async (req, res) => {
   return sendJSONResponse(res, 200, { bucket }, req.method, 'Bucket created sucessfully');
 };
 
+module.exports.searchBucketList = async (req, res, next) => {
+  if (!req.query.q) {
+    return next();
+  }
+  const bucketLists = await BucketList.find({
+    $text: {
+      $search: req.query.q,
+    },
+  }, {
+    score: { $meta: 'textScore' },
+  })
+  // the sort them
+    .sort({
+      score: { $meta: 'textScore' },
+    });
+  if (!bucketLists.length) {
+    return sendJSONResponse(res, 404, null, req.method, `Your search for ${req.query.q} did not return any results`);
+  }
+  return sendJSONResponse(
+    res,
+    200,
+    { bucketLists },
+    req.method,
+    `Your search for ${req.query.q} returned ${bucketLists.length} results`,
+  );
+};
+
 module.exports.getBuckets = async (req, res) => {
-  const buckets = await BucketList.find({ createdBy: req.decoded._id });
-  return sendJSONResponse(res, 200, { buckets }, req.method, 'Bucket Lists fetched successfully');
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 20;
+  const skip = (page * limit) - limit;
+  const bucketsPromise = BucketList
+    .find({ createdBy: req.decoded._id })
+    .skip(skip)
+    .limit(limit)
+    .sort({ createdAt: 'desc' });
+  const countPromise = BucketList.find({ createdBy: req.decoded._id }).count();
+  const [bucketLists, count] = await Promise.all([bucketsPromise, countPromise]);
+  const pages = Math.ceil(count / limit);
+  if (!bucketLists.length && skip) {
+    return sendJSONResponse(res, 404, null, req.method, 'Bucket lists not found ');
+  }
+
+  return sendJSONResponse(res, 200, {
+    bucketLists, page, pages, count,
+  }, req.method, 'Bucket Lists fetched successfully');
 };
 
 module.exports.getOneBucket = async (req, res) => {
