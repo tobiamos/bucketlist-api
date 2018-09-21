@@ -1,7 +1,7 @@
-const { model } = require('mongoose');
+const mongoose = require('mongoose');
 const { sendJSONResponse } = require('../../../helpers');
 
-const BucketList = model('BucketList');
+const BucketList = mongoose.model('BucketList');
 
 module.exports.createBucket = async (req, res) => {
   const { name } = req.body;
@@ -55,10 +55,12 @@ module.exports.getAllItems = async (req, res) => {
 };
 
 module.exports.getOneItem = async (req, res) => {
-  const item = await BucketList.findById(req.params.bucketId).populate({
-    path: 'items',
-    match: { _id: req.params.itemId },
-  }).exec();
+  const item = await BucketList
+    .findById(req.params.bucketId)
+    .select('items')
+    .where('items._id')
+    .equals(req.params.itemId);
+
   if (!item) {
     return sendJSONResponse(res, 404, null, req.method, 'Item not found');
   }
@@ -66,14 +68,24 @@ module.exports.getOneItem = async (req, res) => {
 };
 
 module.exports.updateOneItem = async (req, res) => {
-  const filter = { _id: req.params.bucketId, 'item._id': req.params.itemId };
-  const update = req.body;
-  const item = BucketList.findByIdAndUpdate(filter, update, { new: true, runValidators: true });
-  return sendJSONResponse(res, 200, { item }, req.method, 'Item updated sucessfully');
+  const { name, done } = req.body;
+  const items = await BucketList
+    .findById(req.params.bucketId)
+    .select('items')
+    .exec();
+  const thisItem = items.items.id(req.params.itemId);
+  name ? thisItem.name = name : thisItem.name = thisItem.name;
+  done ? thisItem.done = done : thisItem.done = thisItem.done;
+  await items.save();
+  return sendJSONResponse(res, 200, { items }, req.method, 'Item updated sucessfully');
 };
 
 module.exports.deleteOneItem = async (req, res) => {
-  const items = await BucketList.findById(req.params.bucketId).select('items');
-  items.id(req.params.itemId).remove();
+  const items = await BucketList
+    .findById(req.params.bucketId)
+    .select('items')
+    .exec();
+  items.items.id(req.params.itemId).remove();
+  await items.save();
   return sendJSONResponse(res, 200, null, req.method, 'Item deleted sucessfully');
 };

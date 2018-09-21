@@ -1,13 +1,18 @@
-const { model } = require('mongoose');
+const mongoose = require('mongoose');
 const { sendJSONResponse } = require('../../../helpers');
 
-const User = model('User');
+const User = mongoose.model('User');
 
 module.exports.register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const {
+    name, email, password, confirm,
+  } = req.body;
   const existingUser = await User.findOne({ email });
   if (existingUser) {
     return sendJSONResponse(res, 400, null, req.method, 'An account with this email already exists');
+  }
+  if (password !== confirm) {
+    return sendJSONResponse(res, 400, null, req.method, 'Passwords do not match');
   }
   const user = new User();
   user.name = name;

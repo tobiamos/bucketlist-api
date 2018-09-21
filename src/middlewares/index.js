@@ -1,11 +1,11 @@
 const { ObjectID } = require('mongodb');
-const { model } = require('mongoose');
+const mongoose = require('mongoose');
 const { verify } = require('jsonwebtoken');
 const { promisify } = require('util');
 const { sendJSONResponse } = require('../helpers');
 const { secret } = require('../config');
 
-const BucketList = model('BucketList');
+const BucketList = mongoose.model('BucketList');
 const verifyPromise = promisify(verify);
 
 module.exports.authenticate = async (req, res, next) => {
