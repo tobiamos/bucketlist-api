@@ -117,8 +117,8 @@ module.exports.updateOneItem = async (req, res) => {
     .select('items')
     .exec();
   const thisItem = items.items.id(req.params.itemId);
-  name ? thisItem.name = name : thisItem.name = thisItem.name;
-  done ? thisItem.done = done : thisItem.done = thisItem.done;
+  name !== undefined ? thisItem.name = name : thisItem.name = thisItem.name;
+  done !== undefined ? thisItem.done = done : thisItem.done = thisItem.done;
   await items.save();
   return sendJSONResponse(res, 200, { thisItem }, req.method, 'Item updated sucessfully');
 };

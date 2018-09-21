@@ -60,6 +60,6 @@ module.exports.updateOneItem = {
   },
   body: {
     name: joi.string().optional(),
-    done: joi.string().optional(),
+    done: joi.boolean().optional(),
   },
 };
