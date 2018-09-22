@@ -25,9 +25,7 @@ app.use(cors(corsOptions));
 if (config.env !== 'test') {
   app.use(morgan('dev', { stream: logger.stream }));
 }
-if (config.env === 'development') {
-  app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(docs));
-}
+app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(docs));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: '50mb' }));
