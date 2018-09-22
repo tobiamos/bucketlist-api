@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "keywords": [
     "node",
@@ -18,6 +18,10 @@
     "rest",
     "api"
   ],
+  "engines": {
+    "node": "10.10.0",
+    "npm": "6.4.1"
+  },
   "author": "Amos Tobi",
   "license": "MIT",
   "dependencies": {
