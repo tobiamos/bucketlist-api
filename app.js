@@ -16,7 +16,7 @@ const docs = require('./docs/swagger');
 const app = express();
 
 const corsOptions = {
-  origin: ['http://localhost:4200'],
+  origin: ['http://localhost:4200', 'https://objective-dubinsky-a9186a.netlify.com'],
   methods: ['OPTIONS', 'GET', 'PUT', 'POST', 'DELETE'],
   credentials: true,
 };
