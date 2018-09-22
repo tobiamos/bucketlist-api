@@ -1,6 +1,6 @@
 ## Bucket List Api
 
-###Setup
+### Setup
 1. clone the project locally
  ```git clone https://github.com/tobiamos/bucketlist-client.git```
 
@@ -12,5 +12,5 @@
 1. Make sure your mongodb service is up and running.
 
 
-###Docs
+### Docs
 You can find the swagger docs at ```http://localhost:4000/api/v1/docs```
